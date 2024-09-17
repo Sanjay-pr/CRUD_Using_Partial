@@ -1,0 +1,23 @@
+﻿@model ParentInfo
+@using HtmlHelpers.BeginCollectionItemCore
+
+@using (Html.BeginCollectionItem("ParentsList"))
+{
+    <div class="parent-item">
+            <input type="hidden" asp-for="student" />
+            <input type="hidden" asp-for="StudentId" />
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Contact" class="control-label"></label>
+            <input asp-for="Contact" class="form-control" />
+            <span asp-validation-for="Contact" class="text-danger"></span>
+        </div>
+        <div>
+            <button type="button" class="remove-position-btn btn btn-danger">Remove</button>
+        </div>
+    </div>
+}

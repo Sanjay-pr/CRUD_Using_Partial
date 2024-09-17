@@ -1,0 +1,66 @@
+﻿@model Task1_New.Models.ViewModel.StudentParentViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-info text-center p-1 border border-dark">Student Information</h1>
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Student Id</th>
+                        <th>Student Name</th>
+                        <th>Age</th>
+                        <th>Standard</th>
+                        <th>Parents</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model.students)
+                    {
+                        <tr>
+                            <td>@s.StudentId</td>
+                            <td>@s.Name</td>
+                            <td>@s.Age</td>
+                            <td>@s.Standard</td>
+                            <td>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Contact</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var p in Model.parents.Where(emp => emp.StudentId == s.StudentId))
+                                        {
+                                            <tr>
+                                                <td>@p.Name</td>
+                                                <td>@p.Contact</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" asp-action="Edit" asp-controller="Home" asp-route-id="@s.StudentId">Edit</a>
+                                <a class="btn btn-warning btn-sm" asp-action="Details" asp-controller="Home" asp-route-id="@s.StudentId">Details</a>
+                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="Home" asp-route-id="@s.StudentId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

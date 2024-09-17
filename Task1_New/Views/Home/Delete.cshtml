@@ -1,0 +1,37 @@
+﻿ @model School
+@{
+    ViewData["Title"] = "Delete";
+}
+<h3>Are You Sure Want to Delete this data</h3>
+
+<div>
+    <h3>Student Information</h3>
+    <p><strong>Name:</strong> @Model.StudentInfo.Name</p>
+    <p><strong>Age:</strong> @Model.StudentInfo.Age</p>
+    <p><strong>Standard:</strong> @Model.StudentInfo.Standard</p>
+</div>
+
+@if (Model.ParentsList != null && Model.ParentsList.Any())
+{
+    <div>
+        <h3>Parent Information</h3>
+        <ul>
+            @foreach (var parent in Model.ParentsList)
+            {
+                <li>
+                    <p><strong>Name:</strong> @parent.Name</p>
+                    <p><strong>Contact:</strong> @parent.Contact</p>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <p>No parent information available.</p>
+}
+<form asp-action="Delete">
+    <input type="hidden" asp-for="@Model.StudentInfo.StudentId" />
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-action="Index">Back to List</a>
+</form>
